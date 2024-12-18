@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¡Feliz Cumpleaños con Snoopy!</title>
+    <style>
+        /* Estilos generales */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fce4ec;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+        header {
+            background-color: #ff4081;
+            padding: 2rem;
+            color: white;
+        }
+        .galeria img {
+            width: 15rem;
+            margin: 1rem;
+            border: 3px solid #ff4081;
+            border-radius: 1rem;
+        }
+        footer {
+            margin-top: 2rem;
+        }
+        button {
+            background-color: #ff4081;
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            font-size: 1.2rem;
+            margin-top: 1rem;
+        }
+        button:hover {
+            background-color: #e91e63;
+        }
+        /* Modal (ventana emergente) */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        .modal-content {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            text-align: center;
+            color: #ff4081;
+            font-size: 2rem;
+        }
+        /* Globos con hilo */
+        .balloon {
+            position: fixed;
+            width: 5rem;
+            height: 7rem;
+            border-radius: 50%;
+            opacity: 0.9;
+            animation: float 6s linear infinite;
+        }
+        .balloon::after {
+            content: '';
+            position: absolute;
+            width: 0.2rem;
+            height: 10rem;
+            background-color: #333;
+            top: 7rem;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        @keyframes float {
+            0% { transform: translateY(100vh); opacity: 1; }
+            100% { transform: translateY(-100vh); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>¡Feliz Cumpleaños, MI NIÑA HERMOSA💖!</h1>
+        <p>¡Disfruta tu día con la compañía de Snoopy!</p>
+    </header>
+
+    <div class="galeria">
+        <img src="https://upload.wikimedia.org/wikipedia/en/5/53/Snoopy_Peanuts.png" alt="Snoopy Feliz">
+       
+    </div>
+
+    <footer>
+        <p>Hecho con cariño para un día especial 💖</p>
+        <button onclick="mostrarCelebracion()">¡Presióname!</button>
+    </footer>
+
+    <!-- Ventana emergente -->
+    <div class="modal" id="modal" onclick="cerrarModal(event)">
+        <div class="modal-content">
+            🎉 ¡Feliz Cumpleaños A LA NIÑA MAS HERMOSSA DEL MUNDO, NUNCA TE RINDAS AMOR
+                SIGUE LUCHANDO POR TUS SUEÑOS QUE VAS LLEGAR LEJOS TE AMO MUCHO💖! 🎂
+        </div>
+    </div>
+
+    <!-- Script para globos y fuegos artificiales -->
+    <script>
+        function mostrarCelebracion() {
+            // Mostrar ventana emergente
+            document.getElementById('modal').style.display = 'flex';
+
+            // Crear globos dinámicamente
+            for (let i = 0; i < 30; i++) {
+                let balloon = document.createElement('div');
+                balloon.className = 'balloon';
+                balloon.style.left = Math.random() * 100 + 'vw';
+                balloon.style.backgroundColor = getRandomColor();
+                balloon.style.animationDuration = (Math.random() * 3 + 3) + 's';
+                document.body.appendChild(balloon);
+
+                setTimeout(() => {
+                    balloon.remove(); // Elimina globos después de la animación
+                }, 6000);
+            }
+
+            // Fuegos artificiales (confetti)
+            confettiExplosion();
+        }
+
+        // Función para color aleatorio de los globos
+        function getRandomColor() {
+            let letters = '0123456789ABCDEF';
+            let color = '#';
+            for (let i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+
+        // Función mejorada para confetti intenso
+        function confettiExplosion() {
+            for (let i = 0; i < 300; i++) { // Aumenta el número de partículas
+                setTimeout(() => {
+                    let confettiPiece = document.createElement('div');
+                    confettiPiece.style.position = 'fixed';
+                    confettiPiece.style.width = '8px';
+                    confettiPiece.style.height = '8px';
+                    confettiPiece.style.backgroundColor = getRandomColor();
+                    confettiPiece.style.left = Math.random() * 100 + 'vw';
+                    confettiPiece.style.top = Math.random() * 50 + 'vh';
+                    confettiPiece.style.opacity = 0.8;
+                    confettiPiece.style.transform = 'rotate(' + Math.random() * 360 + 'deg)';
+                    document.body.appendChild(confettiPiece);
+
+                    setTimeout(() => {
+                        confettiPiece.remove();
+                    }, 3000);
+                }, i * 10); // Intervalo más corto para mayor intensidad
+            }
+        }
+
+        // Función para cerrar la ventana emergente al hacer clic en cualquier parte de la pantalla
+        function cerrarModal(event) {
+            if (event.target === document.getElementById('modal')) {
+                document.getElementById('modal').style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
